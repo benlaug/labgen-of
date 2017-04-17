@@ -1,0 +1,159 @@
+# Copyright - Benjamin Laugraud <blaugraud@ulg.ac.be> - 2017
+# http://www.montefiore.ulg.ac.be/~blaugraud
+# http://www.telecom.ulg.ac.be/labgen
+#
+# This file is part of LaBGen-OF.
+#
+# LaBGen-OF is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# LaBGen-OF is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with LaBGen-OF.  If not, see <http://www.gnu.org/licenses/>.
+language: cpp
+
+cache:
+  directories:
+    - $HOME/opencv-3.2.0
+    - $HOME/opencv_contrib-3.2.0
+
+matrix:
+  include:
+#    - os: linux
+#      dist: trusty
+#      compiler: g++
+
+    - os: osx
+      compiler: clang++
+
+before_install:
+  - if   [[ "$TRAVIS_OS_NAME" == "linux" ]];
+    then
+      sudo apt-get update -qq;
+    elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
+    then
+      if [[ -z "$(ls -A $HOME/opencv-3.2.0)" ]];
+      then
+        brew update;
+        brew tap homebrew/science;
+      fi;
+    fi
+
+install:
+  - if   [[ "$TRAVIS_OS_NAME" == "linux" ]];
+    then
+      sudo apt-get install -qq libboost-filesystem-dev
+                               libboost-program-options-dev
+                               libboost-system-dev
+                               libavcodec54
+                               libavcodec-dev
+                               libavformat54
+                               libavformat-dev
+                               libavresample1
+                               libavresample-dev
+                               libavutil52
+                               libavutil-dev
+                               libswscale2
+                               libswscale-dev
+                               libtbb2
+                               libtbb-dev
+                               libjpeg-dev
+                               libpng-dev
+                               libtiff-dev
+                               libjasper-dev
+                               libeigen3-dev;
+    elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
+    then
+      if [[ -z "$(ls -A $HOME/opencv-3.2.0)" ]];
+      then
+        HOMEBREW_MAKE_JOBS=1 brew install -v opencv3 --with-contrib
+                                                     --without-numpy
+                                                     --without-opencv
+                                                     --without-python
+                                                     --without-test;
+        cp -r /usr/local/Cellar/opencv3/3.2.0/* $HOME/opencv-3.2.0;
+      fi;
+    fi
+
+before_script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+    then
+      cd "$HOME";
+      if [[ -n "$(ls -A opencv-3.2.0)" ]];
+      then
+        echo "OpenCV 3.2 with contrib has been fetched from the cache";
+        cd opencv-3.2.0/build;
+      else
+        echo "Compiling and installing OpenCV 3.2 with contrib";
+        wget https://github.com/opencv/opencv/archive/3.2.0.tar.gz;
+        wget https://github.com/opencv/opencv_contrib/archive/3.2.0.tar.gz;
+        tar zxf 3.2.0.tar.gz;
+        tar zxf 3.2.0.tar.gz.1;
+        cd opencv-3.2.0;
+        mkdir build;
+        cd build;
+        cmake -DCMAKE_BUILD_TYPE=Release
+              -DCMAKE_INSTALL_PREFIX=/usr/local
+              -DWITH_OPENCL=OFF
+              -DWITH_CUDA=OFF
+              -DWITH_VTK=OFF
+              -DWITH_MATLAB=OFF
+              -DBUILD_opencv_java=OFF
+              -DBUILD_opencv_python2=OFF
+              -DBUILD_opencv_python3=OFF
+              -DBUILD_TESTS=OFF
+              -DBUILD_PERF_TESTS=OFF ..
+              -DOPENCV_EXTRA_MODULES_PATH=$HOME/opencv_contrib-3.2.0/modules
+              -DBUILD_opencv_aruco=OFF
+              -DBUILD_opencv_bgsegm=OFF
+              -DBUILD_opencv_bioinspired=OFF
+              -DBUILD_opencv_ccalib=OFF
+              -DBUILD_opencv_cnn_3dobj=OFF
+              -DBUILD_opencv_contrib_world=OFF
+              -DBUILD_opencv_cvv=OFF
+              -DBUILD_opencv_datasets=OFF
+              -DBUILD_opencv_dnn=OFF
+              -DBUILD_opencv_dnns_easily_fooled=OFF
+              -DBUILD_opencv_dpm=OFF
+              -DBUILD_opencv_face=OFF
+              -DBUILD_opencv_freetype=OFF
+              -DBUILD_opencv_fuzzy=OFF
+              -DBUILD_opencv_hdf=OFF
+              -DBUILD_opencv_line_descriptor=OFF
+              -DBUILD_opencv_matlab=OFF
+              -DBUILD_opencv_phase_unwrapping=OFF
+              -DBUILD_opencv_plot=OFF
+              -DBUILD_opencv_reg=OFF
+              -DBUILD_opencv_rgbd=OFF
+              -DBUILD_opencv_saliency=OFF
+              -DBUILD_opencv_sfm=OFF
+              -DBUILD_opencv_stereo=OFF
+              -DBUILD_opencv_structured_light=OFF
+              -DBUILD_opencv_surface_matching=OFF
+              -DBUILD_opencv_text=OFF
+              -DBUILD_opencv_tracking=OFF
+              -DBUILD_opencv_xfeatures2d=OFF
+              -DBUILD_opencv_xobjdetect=OFF
+              -DBUILD_opencv_xphoto=OFF;
+        make -j4;
+      fi;
+      sudo make -j4 install;
+      cd "$TRAVIS_BUILD_DIR";
+    fi
+
+script:
+  - cd build
+  - if   [[ "$TRAVIS_OS_NAME" == "linux" ]];
+    then
+      cmake -DCMAKE_BUILD_TYPE=Release ..;
+    elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
+    then
+      cmake -DCMAKE_BUILD_TYPE=Release -DOpenCV_DIR=$HOME/opencv-3.2.0/share/OpenCV ..;
+    fi
+  - make -j4

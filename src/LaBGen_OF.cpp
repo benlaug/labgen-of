@@ -33,7 +33,7 @@ using namespace ns_labgen_of;
 using namespace ns_labgen_of::ns_internals;
 
 /* ========================================================================== *
- * LaBGen_OF                                                             *
+ * LaBGen_OF                                                                  *
  * ========================================================================== */
 
 LaBGen_OF::LaBGen_OF(

@@ -3,20 +3,20 @@
  * http://www.montefiore.ulg.ac.be/~blaugraud
  * http://www.telecom.ulg.ac.be/labgen
  *
- * This file is part of LaBGen-Optical.
+ * This file is part of LaBGen-OF.
  *
- * LaBGen-Optical is free software: you can redistribute it and/or modify
+ * LaBGen-OF is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * LaBGen-Optical is distributed in the hope that it will be useful,
+ * LaBGen-OF is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with LaBGen-Optical.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LaBGen-OF.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <algorithm>
 #include <cstddef>
@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     "LaBGen - Copyright - Benjamin Laugraud <blaugraud@ulg.ac.be> - 2017\n"
     "http://www.montefiore.ulg.ac.be/~blaugraud\n"
     "http://www.telecom.ulg.ac.be/labgen\n\n"
-    "Usage: ./LaBGen-Optical-cli [options]"
+    "Usage: ./LaBGen-OF-cli [options]"
   );
 
   opt_desc.add_options()
@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
    */
 
   cout << "===========================================================" << endl;
-  cout << "= LaBGen-Optical                                          =" << endl;
+  cout << "= LaBGen-OF                                                =" << endl;
   cout << "===========================================================" << endl;
   cout << "= Copyright - Benjamin Laugraud - 2017                    =" << endl;
   cout << "= http://www.montefiore.ulg.ac.be/~blaugraud              =" << endl;
@@ -346,7 +346,7 @@ int main(int argc, char** argv) {
     optical_flow_hsv = unique_ptr<Mat>(new Mat(height, width, CV_8UC3));
 
     if (!split_vis)
-      window = unique_ptr<GridWindow>(new GridWindow("LaBGen-Optical", height, width, 2, 3));
+      window = unique_ptr<GridWindow>(new GridWindow("LaBGen-OF", height, width, 2, 3));
   }
 
   for (int32_t pass = 0, passes = (p_param + 1) / 2; pass < passes; ++pass) {
