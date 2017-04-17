@@ -1,6 +1,6 @@
 # LaBGen-OF
 
-[![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
+[![OpenCV Version](https://img.shields.io/badge/opencv-3.x-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
 
 LaBGen-OF is a patch-based stationary background generation method introduced in a paper submitted to ACIVS 2017, and based on [LaBGen](https://github.com/benlaug/labgen). The purpose of this repository is twofold:
 
@@ -68,10 +68,8 @@ If you use LaBGen-OF in your work, please cite this webpage as long as the corre
 
 Each commited revision is automatically tested using [Travis CI](https://travis-ci.org/benlaug/labgen-of) on:
 
-* Ubuntu 14.04 with the `g++` compiler and OpenCV 2.3 installed from the Ubuntu repositories.
-* Ubuntu 14.04 with the `g++` compiler and OpenCV 3.2 compiled from the sources.
-* OS X El Capitan with the `clang++` compiler and OpenCV 2.4 installed with [Homebrew](https://brew.sh).
-* OS X El Capitan with the `clang++` compiler and OpenCV 3.2 installed with [Homebrew](https://brew.sh).
+* Ubuntu 14.04 with the `g++` compiler and OpenCV 3.2 (with contrib modules) compiled from the sources.
+* OS X El Capitan with the `clang++` compiler and OpenCV 3.2 (with contrib modules) installed with [Homebrew](https://brew.sh).
 
 ## References
 
