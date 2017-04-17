@@ -61,7 +61,7 @@ If you use LaBGen-OF in your work, please cite this webpage as long as the corre
 
 ## Alternatives
 
-* The original version of LaBGen is [available on GitHub](https://github.com/benlaug/labgen).
+* The original patch-based version of LaBGen is [available on GitHub](https://github.com/benlaug/labgen).
 * A pixel-level variant of LaBGen, called LaBGen-P, is also [available on GitHub](https://github.com/benlaug/labgen-p).
 
 ## Testing
