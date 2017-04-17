@@ -69,7 +69,7 @@ If you use LaBGen-OF in your work, please cite this webpage as long as the corre
 Each commited revision is automatically tested using [Travis CI](https://travis-ci.org/benlaug/labgen-of) on:
 
 * Ubuntu 14.04 with the `g++` compiler and OpenCV 3.2 (with contrib modules) compiled from the sources.
-* OS X El Capitan with the `clang++` compiler and OpenCV 3.2 (with contrib modules) installed with [Homebrew](https://brew.sh).
+* OS X El Capitan with the `clang++` compiler and OpenCV 3.2 (with contrib modules) compiled with [Homebrew](https://brew.sh).
 
 ## References
 

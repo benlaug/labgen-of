@@ -25,9 +25,9 @@ cache:
 
 matrix:
   include:
-#    - os: linux
-#      dist: trusty
-#      compiler: g++
+    - os: linux
+      dist: trusty
+      compiler: g++
 
     - os: osx
       compiler: clang++
