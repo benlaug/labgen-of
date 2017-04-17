@@ -72,7 +72,7 @@ install:
     then
       if [[ -z "$(ls -A $HOME/opencv-3.2.0)" ]];
       then
-        HOMEBREW_MAKE_JOBS=1 brew install -v opencv3 --with-contrib
+        HOMEBREW_MAKE_JOBS=4 brew install -v opencv3 --with-contrib
                                                      --without-numpy
                                                      --without-opencv
                                                      --without-python
