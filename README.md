@@ -1,6 +1,6 @@
 # LaBGen-OF
 
-[![OpenCV Version](https://img.shields.io/badge/opencv-3.x-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
+[![OpenCV Version](https://img.shields.io/badge/opencv-3.1-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
 
 > **NEW:** Background learning for detection and tracking from RGBD videos (RGBD2017). Workshop in conjunction with ICIAP 2017, Catania (Italy), September 11th or 12th, 2017. [http://rgbd2017.na.icar.cnr.it](http://rgbd2017.na.icar.cnr.it)
 
