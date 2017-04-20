@@ -2,6 +2,8 @@
 
 [![OpenCV Version](https://img.shields.io/badge/opencv-3.x-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
 
+> **NEW:** Background learning for detection and tracking from RGBD videos (RGBD2017). Workshop in conjunction with ICIAP 2017, Catania (Italy), September 11th or 12th, 2017. [http://rgbd2017.na.icar.cnr.it](http://rgbd2017.na.icar.cnr.it)
+
 LaBGen-OF is a patch-based stationary background generation method introduced in a paper submitted to ACIVS 2017, and based on [LaBGen](https://github.com/benlaug/labgen). The purpose of this repository is twofold:
 
 1. To share the source code of the method.
@@ -11,7 +13,7 @@ LaBGen-OF is a patch-based stationary background generation method introduced in
 
 ## Compiling the program
 
-The program implementing the method has been developed in C++11 and is distributed under the [GPLv3](LICENSE) license. In order to compile it, you need a modern C++ compiler, a copy of the [Boost](http://www.boost.org) library, a copy of the [OpenCV 3](http://opencv.org) library *with the contrib modules*, and the [CMake](https://cmake.org) build automation tool. On UNIX-like environments, the program can be compiled as follows, considering that your terminal is in the source code directory:
+The program implementing the method has been developed in C++11 and is distributed under the [GPLv3](LICENSE) license. In order to compile it, you need a modern C++ compiler, a copy of the [Boost](http://www.boost.org) library, a copy of the [OpenCV 3](http://opencv.org) library **with contrib modules**, and the [CMake](https://cmake.org) build automation tool. On UNIX-like environments, the program can be compiled as follows, considering that your terminal is in the source code directory:
 
 ```
 $ cd build
