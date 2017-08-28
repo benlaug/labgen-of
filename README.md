@@ -27,7 +27,7 @@ Once the program has been compiled, the following command gives the complete lis
 $ ./LaBGen-OF-cli -h
 ```
 
-In this program, the syntax used to provide the path of the input video sequence is the same one used by the OpenCV library. Thus, for instance, one can generate a stationary background image for the IBMtest2 sequence of the [SBI dataset](http://sbmi2015.na.icar.cnr.it/SBIdataset.html) [[1](#references)] with *(A, S, N, P, T) = (DeepFlow, 119, 8, 3, 0.04)* as follows:
+In this program, the syntax used to provide the path of the input video sequence is the same one used by the OpenCV library. Thus, for instance, one can generate a stationary background image for the IBMtest2 sequence of the [SBI dataset](http://sbmi2015.na.icar.cnr.it/SBIdataset.html) [[2](#references)] with *(A, S, N, P, T) = (DeepFlow, 119, 8, 3, 0.04)* as follows:
 
 ```
 $ ./LaBGen-OF-cli -i path_to_IBMtest2/IBMtest2_%6d.png -o my_output_path -a deep_flow -s 119 -n 8 -p 3 -t 4
@@ -57,12 +57,25 @@ Finally, one can use the `-w` option to define (in ms) the time to wait between 
 
 ## Citation
 
-If you use LaBGen-OF in your work, please cite this webpage as long as the corresponding paper is not published.
+If you use LaBGen-OF in your work, please cite paper [[1](#references)] as below:
+
+```
+@inproceedings{Laugraud2017IsAMemoryless,
+  title = {Is a Memoryless Motion Detection Truly Relevant for Background Generation with {LaBGen}?},
+  author = {B. Laugraud and M. {Van Droogenbroeck}},
+  booktitle = {Advanced Concepts for Intelligent Vision Systems (ACIVS)},
+  publisher = {Springer},
+  series = {Lecture Notes in Computer Science},
+  year = {2017},
+  month = Sep,
+  address = {Antwerp, Belgium}
+}
+```
 
 ## Alternatives
 
-* The original patch-based version of LaBGen is [available on GitHub](https://github.com/benlaug/labgen).
-* A pixel-level variant of LaBGen, called LaBGen-P, is also [available on GitHub](https://github.com/benlaug/labgen-p).
+* The original patch-based version of [LaBGen]((https://github.com/benlaug/labgen)).
+* A pixel-level variant of LaBGen called [LaBGen-P]((https://github.com/benlaug/labgen-p)).
 
 ## Testing
 
@@ -73,4 +86,6 @@ Each commited revision is automatically tested using [Travis CI](https://travis-
 
 ## References
 
-[1] L. Maddalena, A. Petrosino. Towards Benchmarking Scene Background Initialization. *International Conference on Image Analysis and Processing Workshops (ICIAP Workshops)*, 9281:469-476, 2015.
+[1] [B. Laugraud, M. Van Droogenbroeck. Is a Memoryless Motion Detection Truly Relevant for Background Generation with LaBGen?. *Advanced Concepts for Intelligent Vision Systems (ACIVS)*, 2017.](http://hdl.handle.net/2268/213147)
+
+[2] L. Maddalena, A. Petrosino. Towards Benchmarking Scene Background Initialization. *International Conference on Image Analysis and Processing Workshops (ICIAP Workshops)*, 9281:469-476, 2015.
