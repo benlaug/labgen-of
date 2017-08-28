@@ -74,8 +74,8 @@ If you use LaBGen-OF in your work, please cite paper [[1](#references)] as below
 
 ## Alternatives
 
-* The original patch-based version of [LaBGen]((https://github.com/benlaug/labgen)).
-* A pixel-level variant of LaBGen called [LaBGen-P]((https://github.com/benlaug/labgen-p)).
+* The original patch-based version of [LaBGen](https://github.com/benlaug/labgen).
+* A pixel-level variant of LaBGen called [LaBGen-P](https://github.com/benlaug/labgen-p).
 
 ## Testing
 
