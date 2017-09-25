@@ -1,6 +1,6 @@
 # LaBGen-OF
 
-[![OpenCV Version](https://img.shields.io/badge/opencv-3.1-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
+[![OpenCV Version](https://img.shields.io/badge/opencv-≥3.1-blue.svg)](http://opencv.org) [![Build Status](https://travis-ci.org/benlaug/labgen-of.svg?branch=master)](https://travis-ci.org/benlaug/labgen-of)
 
 LaBGen-OF is a patch-based stationary background generation method introduced in a paper submitted to ACIVS 2017, and based on [LaBGen](https://github.com/benlaug/labgen). The purpose of this repository is twofold:
 
@@ -11,7 +11,7 @@ LaBGen-OF is a patch-based stationary background generation method introduced in
 
 ## Compiling the program
 
-The program implementing the method has been developed in C++11 and is distributed under the [GPLv3](LICENSE) license. In order to compile it, you need a modern C++ compiler, a copy of the [Boost](http://www.boost.org) library, a copy of the [OpenCV 3](http://opencv.org) library **with contrib modules**, and the [CMake](https://cmake.org) build automation tool. On UNIX-like environments, the program can be compiled as follows, considering that your terminal is in the source code directory:
+The program implementing the method has been developed in C++11 and is distributed under the [GPLv3](LICENSE) license. In order to compile it, you need a modern C++ compiler, a copy of the [Boost](http://www.boost.org) library, a copy of the [OpenCV 3](http://opencv.org) (at least 3.1) library **with contrib modules**, and the [CMake](https://cmake.org) build automation tool. On UNIX-like environments, the program can be compiled as follows, considering that your terminal is in the source code directory:
 
 ```
 $ cd build
@@ -81,8 +81,8 @@ If you use LaBGen-OF in your work, please cite paper [[1](#references)] as below
 
 Each commited revision is automatically tested using [Travis CI](https://travis-ci.org/benlaug/labgen-of) on:
 
-* Ubuntu 14.04 with the `g++` compiler and OpenCV 3.2 (with contrib modules) compiled from the sources.
-* OS X El Capitan with the `clang++` compiler and OpenCV 3.2 (with contrib modules) compiled with [Homebrew](https://brew.sh).
+* Ubuntu 14.04 with the `g++` compiler and OpenCV 3.3 (with contrib modules) compiled from the sources.
+* OS X El Capitan with the `clang++` compiler and OpenCV 3.3 (with contrib modules) installed with [Homebrew](https://brew.sh).
 
 ## References
 
