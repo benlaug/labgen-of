@@ -72,7 +72,7 @@ install:
       if [[ -z "$(ls -A $HOME/opencv-3.3.0)" ]];
       then
         brew install -v opencv;
-        cp -r /usr/local/Cellar/opencv3/3.3.0*/* $HOME/opencv-3.3.0;
+        cp -r /usr/local/Cellar/opencv/3.3.0*/* $HOME/opencv-3.3.0;
       fi;
     fi
 

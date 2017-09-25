@@ -256,10 +256,6 @@ void ArgumentsHandler::define_options() {
       "value of the T parameter (the given value will be divided by 100)"
     )
     (
-      "universal,u",
-      "use the universal set of parameters"
-    )
-    (
       "default,d",
       "use the default set of parameters"
     )
@@ -291,7 +287,7 @@ void ArgumentsHandler::define_options() {
       "record visualization in a video file by giving its path"
     )
     (
-      "wait,t",
+      "wait,u",
       value<int32_t>()->default_value(1),
       "time to wait (in ms) between the processing of two frames with "
       "visualization"
