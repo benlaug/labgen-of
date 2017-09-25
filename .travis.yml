@@ -37,6 +37,7 @@ before_install:
       sudo apt-get update -qq;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
+      /usr/bin/yes | pip uninstall numpy;
       brew update;
     fi
 
