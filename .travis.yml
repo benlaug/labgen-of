@@ -37,11 +37,7 @@ before_install:
       sudo apt-get update -qq;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      if [[ -z "$(ls -A $HOME/opencv-3.3.0)" ]];
-      then
-        brew update;
-        brew tap homebrew/science;
-      fi;
+      brew update;
     fi
 
 install:
@@ -69,7 +65,7 @@ install:
                                libeigen3-dev;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      HOMEBREW_MAKE_JOBS=4 brew install -v opencv3;
+      brew install -v opencv;
     fi
 
 before_script:
