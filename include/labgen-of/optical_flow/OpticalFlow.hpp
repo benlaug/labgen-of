@@ -78,8 +78,8 @@ namespace ns_labgen_of {
         const cv::Mat& input_frame,
         const cv::Mat& optical_flow,
         cv::Mat& arrows_image,
-        size_t step_px = 5,
-        double visibility_factor = 5
+        size_t step_px = 15,
+        double visibility_factor = 3
       );
 
     protected:

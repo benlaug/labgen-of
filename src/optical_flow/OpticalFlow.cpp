@@ -171,8 +171,8 @@ void OpticalFlow::get_arrows_image(
 
   float* optical_flow_buffer = reinterpret_cast<float*>(optical_flow.data);
 
-  for (int row = step_px - 1; row < height; row += step_px) {
-    for (int col = step_px - 1; col < width; col += step_px) {
+  for (int row = step_px - 1; row <= height - step_px; row += step_px) {
+    for (int col = step_px - 1; col <= width - step_px; col += step_px) {
       arrowedLine(
         arrows_image,
         Point(col, row),

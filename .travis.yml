@@ -20,13 +20,12 @@ language: cpp
 
 cache:
   directories:
-    - $HOME/opencv-3.2.0
-    - $HOME/opencv_contrib-3.2.0
+    - $HOME/opencv-3.3.0
+    - $HOME/opencv_contrib-3.3.0
 
 matrix:
   include:
     - os: linux
-      dist: trusty
       compiler: g++
 
     - os: osx
@@ -38,11 +37,8 @@ before_install:
       sudo apt-get update -qq;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      if [[ -z "$(ls -A $HOME/opencv-3.2.0)" ]];
-      then
-        brew update;
-        brew tap homebrew/science;
-      fi;
+      /usr/bin/yes | pip uninstall numpy;
+      brew update;
     fi
 
 install:
@@ -70,32 +66,24 @@ install:
                                libeigen3-dev;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      if [[ -z "$(ls -A $HOME/opencv-3.2.0)" ]];
-      then
-        HOMEBREW_MAKE_JOBS=4 brew install -v opencv3 --with-contrib
-                                                     --without-numpy
-                                                     --without-opencv
-                                                     --without-python
-                                                     --without-test;
-        cp -r /usr/local/Cellar/opencv3/3.2.0/* $HOME/opencv-3.2.0;
-      fi;
+      brew install -v opencv;
     fi
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]];
     then
       cd "$HOME";
-      if [[ -n "$(ls -A opencv-3.2.0)" ]];
+      if [[ -n "$(ls -A opencv-3.3.0)" ]];
       then
-        echo "OpenCV 3.2 with contrib has been fetched from the cache";
-        cd opencv-3.2.0/build;
+        echo "OpenCV 3.3 with contrib has been fetched from the cache";
+        cd opencv-3.3.0/build;
       else
-        echo "Compiling and installing OpenCV 3.2 with contrib";
-        wget https://github.com/opencv/opencv/archive/3.2.0.tar.gz;
-        wget https://github.com/opencv/opencv_contrib/archive/3.2.0.tar.gz;
-        tar zxf 3.2.0.tar.gz;
-        tar zxf 3.2.0.tar.gz.1;
-        cd opencv-3.2.0;
+        echo "Compiling and installing OpenCV 3.3 with contrib";
+        wget https://github.com/opencv/opencv/archive/3.3.0.tar.gz;
+        wget https://github.com/opencv/opencv_contrib/archive/3.3.0.tar.gz;
+        tar zxf 3.3.0.tar.gz;
+        tar zxf 3.3.0.tar.gz.1;
+        cd opencv-3.3.0;
         mkdir build;
         cd build;
         cmake -DCMAKE_BUILD_TYPE=Release
@@ -108,8 +96,8 @@ before_script:
               -DBUILD_opencv_python2=OFF
               -DBUILD_opencv_python3=OFF
               -DBUILD_TESTS=OFF
-              -DBUILD_PERF_TESTS=OFF ..
-              -DOPENCV_EXTRA_MODULES_PATH=$HOME/opencv_contrib-3.2.0/modules
+              -DBUILD_PERF_TESTS=OFF
+              -DOPENCV_EXTRA_MODULES_PATH=$HOME/opencv_contrib-3.3.0/modules
               -DBUILD_opencv_aruco=OFF
               -DBUILD_opencv_bgsegm=OFF
               -DBUILD_opencv_bioinspired=OFF
@@ -119,12 +107,12 @@ before_script:
               -DBUILD_opencv_cvv=OFF
               -DBUILD_opencv_datasets=OFF
               -DBUILD_opencv_dnn=OFF
-              -DBUILD_opencv_dnns_easily_fooled=OFF
               -DBUILD_opencv_dpm=OFF
               -DBUILD_opencv_face=OFF
               -DBUILD_opencv_freetype=OFF
               -DBUILD_opencv_fuzzy=OFF
               -DBUILD_opencv_hdf=OFF
+              -DBUILD_opencv_img_hash=OFF
               -DBUILD_opencv_line_descriptor=OFF
               -DBUILD_opencv_matlab=OFF
               -DBUILD_opencv_phase_unwrapping=OFF
@@ -140,7 +128,7 @@ before_script:
               -DBUILD_opencv_tracking=OFF
               -DBUILD_opencv_xfeatures2d=OFF
               -DBUILD_opencv_xobjdetect=OFF
-              -DBUILD_opencv_xphoto=OFF;
+              -DBUILD_opencv_xphoto=OFF ..;
         make -j4;
       fi;
       sudo make -j4 install;
@@ -149,11 +137,5 @@ before_script:
 
 script:
   - cd build
-  - if   [[ "$TRAVIS_OS_NAME" == "linux" ]];
-    then
-      cmake -DCMAKE_BUILD_TYPE=Release ..;
-    elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
-    then
-      cmake -DCMAKE_BUILD_TYPE=Release -DOpenCV_DIR=$HOME/opencv-3.2.0/share/OpenCV ..;
-    fi
-  - make -j4
+  - cmake -DCMAKE_BUILD_TYPE=Release ..;
+  - make
