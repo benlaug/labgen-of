@@ -120,49 +120,48 @@ int main(int argc, char** argv) {
   unique_ptr<GridWindow> window;
   unique_ptr<VideoWriter> record_stream;
 
-  if (
-    (args_h.get_visualization() && !args_h.get_split_vis()) ||
-     args_h.get_record()
-   ) {
+  if (args_h.get_visualization() || args_h.get_record()) {
     arrows_image     = unique_ptr<Mat>(new Mat(height, width, CV_8UC3));
     optical_flow_hsv = unique_ptr<Mat>(new Mat(height, width, CV_8UC3));
 
-    TextProperties::TextPropertiesPtr title_properties = nullptr;
+    if (!args_h.get_split_vis()) {
+      TextProperties::TextPropertiesPtr title_properties = nullptr;
 
-    if (args_h.get_record()) {
-      title_properties = make_shared<TextProperties>(
-        TextProperties::Font::FONT_DUPLEX,
-        0.8
-      );
-    }
-    else
-      title_properties = make_shared<TextProperties>();
+      if (args_h.get_record()) {
+        title_properties = make_shared<TextProperties>(
+          TextProperties::Font::FONT_DUPLEX,
+          0.8
+        );
+      }
+      else
+        title_properties = make_shared<TextProperties>();
 
-    window = unique_ptr<GridWindow>(
-      new GridWindow(
-        "LaBGen-OF",
-        (args_h.get_v_height() > 0) ? args_h.get_v_height() : height,
-        (args_h.get_v_width() > 0) ? args_h.get_v_width() : width,
-        2,
-        3,
-        title_properties
-      )
-    );
-
-    if (args_h.get_keep_ratio())
-      window->keep_ratio();
-
-    if (args_h.get_record()) {
-      const Mat& buffer = window->get_buffer();
-
-      record_stream = unique_ptr<VideoWriter>(
-        new VideoWriter(
-          args_h.get_record_path(),
-          CV_FOURCC('M','J','P','G'),
-          args_h.get_record_fps(),
-          Size(buffer.cols, buffer.rows)
+      window = unique_ptr<GridWindow>(
+        new GridWindow(
+          "LaBGen-OF",
+          (args_h.get_v_height() > 0) ? args_h.get_v_height() : height,
+          (args_h.get_v_width() > 0) ? args_h.get_v_width() : width,
+          2,
+          3,
+          title_properties
         )
       );
+
+      if (args_h.get_keep_ratio())
+        window->keep_ratio();
+
+      if (args_h.get_record()) {
+        const Mat& buffer = window->get_buffer();
+
+        record_stream = unique_ptr<VideoWriter>(
+          new VideoWriter(
+            args_h.get_record_path(),
+            CV_FOURCC('M','J','P','G'),
+            args_h.get_record_fps(),
+            Size(buffer.cols, buffer.rows)
+          )
+        );
+      }
     }
   }
 
@@ -191,9 +190,10 @@ int main(int argc, char** argv) {
   cout << endl << "Processing..." << endl;
   bool first_frame = true;
 
-  FramesVec::const_iterator begin = frames.begin();
-  FramesVec::const_iterator it    = begin + 1;
-  FramesVec::const_iterator end   = frames.end();
+  FramesVec::const_iterator begin   = frames.begin();
+  FramesVec::const_iterator it      = begin + 1;
+  FramesVec::const_iterator prev_it = begin;
+  FramesVec::const_iterator end     = frames.end();
 
   for (
     int32_t pass = 0, passes = (args_h.get_p_param() + 1) / 2;
@@ -211,7 +211,7 @@ int main(int argc, char** argv) {
       /* Visualization. */
       if (args_h.get_visualization() || args_h.get_record()) {
         OpticalFlow::get_arrows_image(
-          *it,
+          *prev_it,
           labgen_of.get_vector_field(),
           *arrows_image
         );
@@ -257,6 +257,7 @@ int main(int argc, char** argv) {
       }
 
       /* Move iterator. */
+      prev_it = it;
       it = (forward) ? ++it : --it;
 
       /* If iterator is at the end. */

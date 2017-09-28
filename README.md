@@ -9,6 +9,10 @@ LaBGen-OF is a patch-based stationary background generation method introduced in
 
 ![Graphical Abstract](.readme/graphical-abstract.png)
 
+Here is a video showing some backgrounds estimated by LaBGen-OF (click on the image below to play it):
+
+[![Demonstration of LaBGen-OF](https://img.youtube.com/vi/6tzzY65sCzc/0.jpg)](https://www.youtube.com/watch?v=6tzzY65sCzc "Click to play")
+
 ## Compiling the program
 
 The program implementing the method has been developed in C++11 and is distributed under the [GPLv3](LICENSE) license. In order to compile it, you need a modern C++ compiler, a copy of the [Boost](http://www.boost.org) library, a copy of the [OpenCV 3](http://opencv.org) (at least 3.1) library **with contrib modules**, and the [CMake](https://cmake.org) build automation tool. On UNIX-like environments, the program can be compiled as follows, considering that your terminal is in the source code directory:
@@ -24,36 +28,18 @@ $ make
 Once the program has been compiled, the following command gives the complete list of available options:
 
 ```
-$ ./LaBGen-OF-cli -h
+$ ./LaBGen-OF-cli --help
 ```
 
-In this program, the syntax used to provide the path of the input video sequence is the same one used by the OpenCV library. Thus, for instance, one can generate a stationary background image for the IBMtest2 sequence of the [SBI dataset](http://sbmi2015.na.icar.cnr.it/SBIdataset.html) [[2](#references)] with *(A, S, N, P, T) = (DeepFlow, 119, 8, 3, 0.04)* as follows:
-
-```
-$ ./LaBGen-OF-cli -i path_to_IBMtest2/IBMtest2_%6d.png -o my_output_path -a deep_flow -s 119 -n 8 -p 3 -t 4
-```
-
-The following strings are accepted with the `-a` option: `deep_flow`, `sparse_to_dense` (Lucas-Kanade), `dis_flow`, `farneback`, `simple_flow`, `dual_tvl1`. One can directly use the default set of parameters with the `-d` option:
-
-```
-$ ./LaBGen-OF-cli -i path_to_IBMtest2/IBMtest2_%6d.png -o my_output_path -d
-```
-
-One can observe the processing performed by LaBGen-OF in graphical windows by adding the `-v` option:
+As an example, the IBMtest2 sequence of the [SBI dataset](http://sbmi2015.na.icar.cnr.it/SBIdataset.html) [[4](#references)] can be processed with the default set of parameters as follows:
 
 ```
 $ ./LaBGen-OF-cli -i path_to_IBMtest2/IBMtest2_%6d.png -o my_output_path -d -v
 ```
 
-With this last option, the processing will be slower as an estimation of the stationary background is generated after each frame in the corresponding window. Here is an example of the execution of the program with the `-v` option:
-
 ![Screenshot](.readme/screenshot.png)
 
-By default, all the items to observe are gathered in a unique window. If, for any reason, a graphical window per item is required, one can add the `-l` option along with `-v`:
-
-![Screenshot Split](.readme/screenshot-split.png)
-
-Finally, one can use the `-w` option to define (in ms) the time to wait between the processing of two frames when the visualization is enabled. This time is given to the `waitKey()` function of OpenCV. Consequently, the option `-w 0` means that you have to press any key to process the next frame. By default, the time is defined to 1 ms.
+A full documentation of the options of the program is [available on the wiki](https://github.com/benlaug/labgen-of/wiki/Arguments-of-the-program).
 
 ## Citation
 

@@ -37,11 +37,8 @@ before_install:
       sudo apt-get update -qq;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      if [[ -z "$(ls -A $HOME/opencv-3.3.0)" ]];
-      then
-        /usr/bin/yes | pip uninstall numpy;
-        brew update;
-      fi;
+      /usr/bin/yes | pip uninstall numpy;
+      brew update;
     fi
 
 install:
@@ -69,11 +66,7 @@ install:
                                libeigen3-dev;
     elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
     then
-      if [[ -z "$(ls -A $HOME/opencv-3.3.0)" ]];
-      then
-        brew install -v opencv;
-        cp -r /usr/local/Cellar/opencv/3.3.0*/* $HOME/opencv-3.3.0;
-      fi;
+      brew install -v opencv;
     fi
 
 before_script:
@@ -144,11 +137,5 @@ before_script:
 
 script:
   - cd build
-  - if   [[ "$TRAVIS_OS_NAME" == "linux" ]];
-    then
-      cmake -DCMAKE_BUILD_TYPE=Release ..;
-    elif [[ "$TRAVIS_OS_NAME" ==   "osx" ]];
-    then
-      cmake -DCMAKE_BUILD_TYPE=Release -DOpenCV_DIR=$HOME/opencv-3.3.0/share/OpenCV ..;
-    fi
+  - cmake -DCMAKE_BUILD_TYPE=Release ..;
   - make
